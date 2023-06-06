@@ -1,5 +1,8 @@
-This fork enhances the processing time of the script compared to the original Enhanced Auto White Balance
-In my testing, i saw up to 5x enhancement of speed
+This fork enhances the processing time of the script compared to the original Enhanced Auto White Balance  
+In my testing, i saw up to 5x enhancement of speed  
+Changes: In the original, when finding the percentage, it slowly incremented by 1, which took a lot of time especially on high res images. I changed it so it increments by 10, and then when it overshoots it decreases by 1 until it reaches the percentage  
+TODO:  
+ Add option for changing the step size from dialog instead of it being permanently set to 10
 
 **Original Readme:**  
 **eawb.py**  
