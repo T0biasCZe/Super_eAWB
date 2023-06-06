@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """=========================================================="""
 ##  Copyright 17 Jan 2018  @Doyousketch2  <doyousketch2@yahoo.com>
+##  Enhanced by T0biasCZe 7 June 2023
 ##  GNU GPL v3 - http://www.gnu.org/licenses/gpl-3.0.html
 """=========================================================="""
 ##  Place script in directory that suits your OS:
@@ -45,33 +46,66 @@ def eawb( img, draw, hi, blow, lo, burn, soft ):
   ##  so we just skip the first 5 values with 5 blank spaces.
 
   ##  get full red percentile, then narrow in on this histogram channel
-  _, _, _, _, _, prcntR  = pdb .gimp_histogram( draw, 1, loR, hiR )
+  _, _, _, _, _, prcntR = pdb.gimp_histogram(draw, 1, loR, hiR)
   while prcntR > amt_lo:
-    loR += 1  ##  increase red low end 'till percent is within lo clip amount
-    _, _, _, _, _, prcntR  = pdb .gimp_histogram( draw, 1, loR, hiR )
+    loR += 10  ##  increase red low end by 10
+    _, _, _, _, _, prcntR = pdb.gimp_histogram(draw, 1, loR, hiR)
+
+  # Adjust loR once the desired percentile is reached
+  while prcntR <= amt_lo:
+    loR -= 1  ##  decrease red low end by 1
+    _, _, _, _, _, prcntR = pdb.gimp_histogram(draw, 1, loR, hiR)
+
   while prcntR > amt_hi:
-    hiR -= 1  ##  decrease red high end 'till percent is within hi clip amount
-    _, _, _, _, _, prcntR  = pdb .gimp_histogram( draw, 1, loR, hiR )
+    hiR -= 10  ##  decrease red high end by 10
+    _, _, _, _, _, prcntR = pdb.gimp_histogram(draw, 1, loR, hiR)
+
+  # Adjust hiR once the desired percentile is reached
+  while prcntR <= amt_hi:
+    hiR += 1  ##  increase red high end by 1
+    _, _, _, _, _, prcntR = pdb.gimp_histogram(draw, 1, loR, hiR)
 
 
   ##  get full green percentile, then narrow in on this histogram channel
-  _, _, _, _, _, prcntG  = pdb .gimp_histogram( draw, 2, loG, hiG )
+  _, _, _, _, _, prcntG = pdb.gimp_histogram(draw, 2, loG, hiG)
   while prcntG > amt_lo:
-    loG += 1  ##  increase green low end 'till percent is within lo clip amount
-    _, _, _, _, _, prcntG  = pdb .gimp_histogram( draw, 2, loG, hiG )
+    loG += 10  ##  increase green low end by 10
+    _, _, _, _, _, prcntG = pdb.gimp_histogram(draw, 2, loG, hiG)
+
+  # Adjust loG once the desired percentile is reached
+  while prcntG <= amt_lo:
+    loG -= 1  ##  decrease green low end by 1
+    _, _, _, _, _, prcntG = pdb.gimp_histogram(draw, 2, loG, hiG)
+
   while prcntG > amt_hi:
-    hiG -= 1  ##  decrease green high end 'till percent is within hi clip amount
-    _, _, _, _, _, prcntG  = pdb .gimp_histogram( draw, 2, loG, hiG )
+    hiG -= 10  ##  decrease green high end by 10
+    _, _, _, _, _, prcntG = pdb.gimp_histogram(draw, 2, loG, hiG)
+
+  # Adjust hiG once the desired percentile is reached
+  while prcntG <= amt_hi:
+    hiG += 1  ##  increase green high end by 1
+    _, _, _, _, _, prcntG = pdb.gimp_histogram(draw, 2, loG, hiG)
 
 
   ##  get full blue percentile, then narrow in on this histogram channel
-  _, _, _, _, _, prcntB  = pdb .gimp_histogram( draw, 3, loB, hiB )
+  _, _, _, _, _, prcntB = pdb.gimp_histogram(draw, 3, loB, hiB)
   while prcntB > amt_lo:
-    loB += 1  ##  increase blue low end 'till percent is within lo clip amount
-    _, _, _, _, _, prcntB  = pdb .gimp_histogram( draw, 3, loB, hiB )
+    loB += 10  ##  increase blue low end by 10
+    _, _, _, _, _, prcntB = pdb.gimp_histogram(draw, 3, loB, hiB)
+
+  # Adjust loB once the desired percentile is reached
+  while prcntB <= amt_lo:
+    loB -= 1  ##  decrease blue low end by 1
+    _, _, _, _, _, prcntB = pdb.gimp_histogram(draw, 3, loB, hiB)
+
   while prcntB > amt_hi:
-    hiB -= 1  ##  decrease blue high end 'till percent is within hi clip amount
-    _, _, _, _, _, prcntB  = pdb .gimp_histogram( draw, 3, loB, hiB )
+    hiB -= 10  ##  decrease blue high end by 10
+    _, _, _, _, _, prcntB = pdb.gimp_histogram(draw, 3, loB, hiB)
+
+  # Adjust hiB once the desired percentile is reached
+  while prcntB <= amt_hi:
+    hiB += 1  ##  increase blue high end by 1
+    _, _, _, _, _, prcntB = pdb.gimp_histogram(draw, 3, loB, hiB)
 
   ##  back off a bit so we don't overshoot our target.
 
@@ -133,13 +167,13 @@ def eawb( img, draw, hi, blow, lo, burn, soft ):
 
 
 register (
-        "eawb",                 ##  commandline name
-        "Enhanced Auto White Balance",  ##  blurb
+        "super_eawb",                 ##  commandline name
+        "Super Enhanced Auto White Balance",  ##  blurb
         "Chops top & bottom off each RGB channel",  ##  help
-        "Doyousketch2",      ##  author
+        "Doyousketch2, T0biasCZe",      ##  author
         "GNU GPL v3",       ##  copyright
         "2018",            ##  date
-        "<Image>/Filters/Enhance/Enhanced Auto White Balance",  ##  menu location
+        "<Image>/Filters/Enhance/Super Enhanced Auto White Balance++",  ##  menu location
         "RGB*",          ##  image types
         [               ## var, gui label, default, (min, max, step)
           (PF_SLIDER, "hi",  "Highlight Clip", 7, (0, 50, 1) ),
