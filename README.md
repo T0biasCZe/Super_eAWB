@@ -1,7 +1,7 @@
 This fork enhances the processing time of the script compared to the original Enhanced Auto White Balance
 In my testing, i saw up to 5x enhancement of speed
 
-Original Readme:
+**Original Readme:**  
 **eawb.py**  
 **E**nhanced **A**uto **W**hite **B**alance for GIMP  
 Filters >> *Enhance* >> Enhanced Auto White Balance  
